@@ -30,3 +30,8 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #mybatis日志
+
+# 设置日志级别
+#logging:
+ # level:
+    #root: ERROR

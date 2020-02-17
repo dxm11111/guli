@@ -27,6 +27,7 @@ import java.util.List;
 @Api(description = "讲师管理")
 @RestController
 @RequestMapping("/admin/edu/teacher")
+@CrossOrigin//解决跨域问题
 public class TeacherController {
 
     @Autowired
@@ -68,5 +69,31 @@ public class TeacherController {
         return  R.ok().data("total", total).data("rows", records).message("获取讲师分页列表成功");
     }
 
+    @ApiOperation(value = "新增讲师")
+    @PostMapping("save")
+    public R save(
+            @ApiParam(name = "teacher", value = "讲师对象", required = true)
+            @RequestBody Teacher teacher) {
+        teacherService.save(teacher);
+        return R.ok().message("新增讲师成功");
+    }
+
+    @ApiOperation(value = "获取讲师")
+    @GetMapping("get/{id}")
+    public R get(
+            @ApiParam(name = "id", value = "讲师ID", required = true)
+            @PathVariable String id) {
+        Teacher teacher = teacherService.getById(id);
+        return R.ok().data("item", teacher);
+    }
+
+    @ApiOperation(value = "修改讲师")
+    @PutMapping("update")
+    public R updateById(
+            @ApiParam(name = "teacher", value = "讲师对象", required = true)
+            @RequestBody Teacher teacher) {
+        teacherService.updateById(teacher);
+        return R.ok().message("修改讲师成功");
+    }
 }
 
